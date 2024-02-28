@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
   
     const configResponse = document.createElement('p');
-    configResponse.innerHTML = contactInfo;
+    configResponse.innerHTML = configInfo;
     outputElement.appendChild(configResponse);
   }
 
