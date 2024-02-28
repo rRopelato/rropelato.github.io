@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Ropelato | Portfolio</title>
+</head>
+<body>
+  <div class="desktop">
+    <div id="desktop-icon" class="desktop-icon" ondblclick="showTerminal()">
+      <i class="fas fa-terminal fa-3x"></i>
+      <span class="icon-text">terminal.exe</span>
+    </div>
+    <div id="loading" class="loading">
+      <div id="progress-bar" class="progress-bar"></div>
+      <span id="loading-text" class="loading-text">Loading...</span>
+    </div>
+    <div class="terminal-container hidden">
+      <div class="terminal">
+        <div class="command-examples">commands: about, skills, projects, contact, clear, joke</div>
+        <div class="output" id="output"></div>
+        <div class="input">
+          <span id="input-prefix">user$</span>
+          <input type="text" id="input" placeholder="Type your command..." autofocus>
+        </div>
+      </div>  
+      <div class="terminal-border"></div>
+    </div>
+  </div>
+
+  <audio id="startup-sound" src="assets/mp3/startup.mp3"></audio>
+  <audio id="beep-sound" src="assets/mp3/beep.mp3"></audio>
+  <audio id="hdd-sound" src="assets/mp3/hdd.mp3"></audio>
+</body>
+
+  
+<script src="main.js"></script>
+
+</html>
