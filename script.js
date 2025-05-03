@@ -149,7 +149,6 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', animateOnScroll);
     window.addEventListener('DOMContentLoaded', animateOnScroll);
 
-    // Easter egg: OIIA OIIA cat video
     const profileImg = document.querySelector('.about-image img');
     let clickCount = 0;
     let clickTimer = null;
@@ -174,7 +173,6 @@ document.addEventListener('DOMContentLoaded', function() {
         video.style.pointerEvents = 'auto';
         video.style.transition = 'opacity 0.3s';
         document.body.appendChild(video);
-        // Fechar ao clicar no vídeo ou pressionar ESC
         video.addEventListener('click', () => {
             video.style.opacity = '0';
             setTimeout(() => video.remove(), 300);
@@ -192,7 +190,7 @@ document.addEventListener('DOMContentLoaded', function() {
             clickCount++;
             if (clickTimer) clearTimeout(clickTimer);
             clickTimer = setTimeout(() => { clickCount = 0; }, 700);
-            if (clickCount >= 5) {
+            if (clickCount >= 3) {
                 showOiiaEasterEgg();
                 clickCount = 0;
             }
