@@ -854,4 +854,14 @@ body, .project-card, .resume-content, .timeline-item, .skill-item {
     background: var(--accent-color);
     color: #fff;
     box-shadow: 0 0 10px var(--accent-color);
+}
+
+.easter-egg-hint {
+    font-size: 0.95rem;
+    color: var(--accent-color);
+    margin-top: 0.5rem;
+    text-align: center;
+    opacity: 0.7;
+    font-style: italic;
+    user-select: none;
 } 

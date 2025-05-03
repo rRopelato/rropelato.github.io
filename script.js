@@ -148,6 +148,56 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     window.addEventListener('scroll', animateOnScroll);
     window.addEventListener('DOMContentLoaded', animateOnScroll);
+
+    // Easter egg: OIIA OIIA cat video
+    const profileImg = document.querySelector('.about-image img');
+    let clickCount = 0;
+    let clickTimer = null;
+
+    function showOiiaEasterEgg() {
+        if (document.getElementById('oiia-easter-egg')) return;
+        const video = document.createElement('video');
+        video.id = 'oiia-easter-egg';
+        video.src = 'video/catvideo.mp4';
+        video.autoplay = true;
+        video.loop = true;
+        video.muted = false;
+        video.volume = 0.15;
+        video.style.position = 'fixed';
+        video.style.top = '0';
+        video.style.left = '0';
+        video.style.width = '100vw';
+        video.style.height = '100vh';
+        video.style.objectFit = 'cover';
+        video.style.zIndex = '999';
+        video.style.opacity = '0.18';
+        video.style.pointerEvents = 'auto';
+        video.style.transition = 'opacity 0.3s';
+        document.body.appendChild(video);
+        // Fechar ao clicar no vídeo ou pressionar ESC
+        video.addEventListener('click', () => {
+            video.style.opacity = '0';
+            setTimeout(() => video.remove(), 300);
+        });
+        document.addEventListener('keydown', function escListener(e) {
+            if (e.key === 'Escape') {
+                video.style.opacity = '0';
+                setTimeout(() => video.remove(), 300);
+                document.removeEventListener('keydown', escListener);
+            }
+        });
+    }
+    if (profileImg) {
+        profileImg.addEventListener('click', () => {
+            clickCount++;
+            if (clickTimer) clearTimeout(clickTimer);
+            clickTimer = setTimeout(() => { clickCount = 0; }, 700);
+            if (clickCount >= 5) {
+                showOiiaEasterEgg();
+                clickCount = 0;
+            }
+        });
+    }
 });
 
 function createParticles() {
