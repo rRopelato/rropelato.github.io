@@ -139,7 +139,7 @@ function createParticles() {
     particlesContainer.style.pointerEvents = 'none';
     document.body.prepend(particlesContainer);
     
-    const particleCount = 30;
+    const particleCount = 60;
     
     for (let i = 0; i < particleCount; i++) {
         createParticle(particlesContainer);
@@ -150,29 +150,34 @@ function createParticle(container) {
     const particle = document.createElement('div');
     particle.className = 'particle';
     particle.style.position = 'absolute';
-    particle.style.width = Math.random() * 3 + 1 + 'px';
-    particle.style.height = particle.style.width;
-    particle.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+    const size = Math.random() * 12 + 8;
+    particle.style.width = size + 'px';
+    particle.style.height = size + 'px';
+    const colors = [
+        'rgba(79,70,229,0.25)',
+        'rgba(16,185,129,0.18)',
+        'rgba(255,255,255,0.18)',
+        'rgba(55,48,163,0.18)',
+        'rgba(255,255,255,0.10)'
+    ];
+    particle.style.background = colors[Math.floor(Math.random() * colors.length)];
     particle.style.borderRadius = '50%';
     
-    // Posição aleatória
     particle.style.left = Math.random() * 100 + '%';
     particle.style.top = Math.random() * 100 + '%';
     
-    // Animação
-    particle.style.transition = 'transform ' + (Math.random() * 10 + 10) + 's linear infinite';
+    const duration = Math.random() * 8 + 8;
+    particle.style.transition = 'transform ' + duration + 's linear';
     particle.style.transform = 'translateY(0)';
     
     container.appendChild(particle);
     
-    // Iniciar a "flutuação"
     setTimeout(() => {
-        particle.style.transform = 'translateY(-100vh)';
+        particle.style.transform = 'translateY(-120vh)';
     }, 100);
     
-    // Recriar partícula quando a animação terminar
     setTimeout(() => {
         particle.remove();
         createParticle(container);
-    }, Math.random() * 10000 + 10000);
+    }, duration * 1000);
 } 
