@@ -620,4 +620,97 @@ footer {
     .timeline-date {
         min-width: auto;
     }
+}
+
+.resume-content {
+    background: var(--card-bg);
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+    color: var(--text-color);
+    margin-top: 2rem;
+}
+.resume-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+}
+.resume-location, .resume-contact {
+    color: #bdbdbd;
+    font-size: 1rem;
+    margin-bottom: 0.2rem;
+}
+.resume-contact a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+.resume-contact a:hover {
+    text-decoration: underline;
+}
+.resume-content hr {
+    border: none;
+    border-top: 1px solid var(--gray-200);
+    margin: 1.2rem 0;
+}
+.resume-content h3 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.7rem;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+.resume-skills {
+    list-style: disc inside;
+    margin-bottom: 1.2rem;
+    color: #d1d1d1;
+}
+.resume-job {
+    margin-bottom: 1.5rem;
+}
+.resume-job-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    color: var(--accent-color);
+}
+.resume-job-role {
+    font-style: italic;
+    color: #bdbdbd;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+.resume-job ul {
+    margin-left: 1.2rem;
+    color: #d1d1d1;
+    margin-bottom: 0.5rem;
+}
+.resume-edu {
+    margin-top: 0.7rem;
+    margin-bottom: 1.5rem;
+}
+.resume-edu-title {
+    font-weight: 600;
+    color: var(--accent-color);
+}
+.resume-edu-date {
+    float: right;
+    color: var(--accent-color);
+    font-size: 0.95rem;
+}
+.resume-edu-course {
+    color: #d1d1d1;
+    margin-top: 0.2rem;
+    font-size: 1rem;
+}
+@media (max-width: 768px) {
+    .resume-content {
+        padding: 1rem;
+    }
+    .resume-title {
+        font-size: 1.3rem;
+    }
+    .resume-job-header, .resume-edu-date {
+        flex-direction: column;
+        float: none;
+        font-size: 0.95rem;
+    }
 } 
