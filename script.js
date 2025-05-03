@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Verificar se a imagem está sendo carregada
     const profileImage = document.querySelector('.about-image img');
     if (profileImage) {
         profileImage.onload = function() {
@@ -10,7 +9,6 @@ document.addEventListener('DOMContentLoaded', function() {
         };
     }
 
-    // Animação de entrada para os elementos principais
     const fadeElements = document.querySelectorAll('.about-content, .about-details, .section-header, .blog-grid, .projects-grid, .skills-container, .timeline');
     
     fadeElements.forEach((element, index) => {
@@ -20,18 +18,15 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 100 * index);
     });
     
-    // Smooth scroll para links de navegação
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             
-            // Atualizar classe active nos itens do dock
             document.querySelectorAll('.dock-item').forEach(item => {
                 item.classList.remove('active');
             });
             this.classList.add('active');
             
-            // Scroll suave até o alvo
             const targetId = this.getAttribute('href');
             const targetElement = document.querySelector(targetId);
             
@@ -42,14 +37,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Adicionar efeito nos tooltips do dock
     const dockItems = document.querySelectorAll('.dock-item');
     dockItems.forEach(item => {
         if (!item.querySelector('.tooltip')) {
             const tooltip = document.createElement('span');
             tooltip.className = 'tooltip';
             
-            // Obter nome da seção a partir do href
             const href = item.getAttribute('href');
             if (href && href.startsWith('#')) {
                 const sectionId = href.substring(1);
@@ -59,19 +52,23 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Detecção de seção ativa durante scroll
     const sections = document.querySelectorAll('section');
     window.addEventListener('scroll', function() {
         let current = '';
+        const scrollPosition = window.scrollY + window.innerHeight;
+        const pageHeight = document.documentElement.scrollHeight;
         
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.clientHeight;
-            if (pageYOffset >= (sectionTop - 200)) {
+            if (window.pageYOffset >= (sectionTop - 200)) {
                 current = section.getAttribute('id');
             }
         });
-        
+        if (Math.abs(scrollPosition - pageHeight) < 2) {
+            const lastSection = sections[sections.length - 1];
+            current = lastSection.getAttribute('id');
+        }
         dockItems.forEach(item => {
             item.classList.remove('active');
             const href = item.getAttribute('href');
@@ -81,10 +78,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Efeito de partículas no background (opcional, deixa mais leve descomentando)
     createParticles();
 
-    // Efeito hover 3D para os cards de projetos
     const cards = document.querySelectorAll('.project-card');
     cards.forEach(card => {
         card.addEventListener('mousemove', function(e) {
@@ -106,7 +101,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Efeito de digitação para o título principal
     const titleElement = document.querySelector('h1');
     if (titleElement) {
         const titleText = titleElement.innerHTML;
@@ -124,9 +118,38 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         typeWriter();
     }
+
+    const backToTopBtn = document.createElement('button');
+    backToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
+    backToTopBtn.className = 'back-to-top';
+    backToTopBtn.setAttribute('aria-label', 'Voltar ao topo');
+    document.body.appendChild(backToTopBtn);
+
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            backToTopBtn.classList.add('show');
+        } else {
+            backToTopBtn.classList.remove('show');
+        }
+    });
+
+    const animatedSections = document.querySelectorAll('.section, .projects-grid, .skills-container, .timeline, .about-details');
+    function animateOnScroll() {
+        animatedSections.forEach(section => {
+            const rect = section.getBoundingClientRect();
+            if (rect.top < window.innerHeight - 80) {
+                section.classList.add('in-view');
+            }
+        });
+    }
+    window.addEventListener('scroll', animateOnScroll);
+    window.addEventListener('DOMContentLoaded', animateOnScroll);
 });
 
-// Função para criar efeito de partículas
 function createParticles() {
     const particlesContainer = document.createElement('div');
     particlesContainer.className = 'particles-container';
