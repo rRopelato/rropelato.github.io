@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const targetId = this.getAttribute('href');
             const targetElement = document.querySelector(targetId);
+            if (!targetElement) return;
             
             window.scrollTo({
                 top: targetElement.offsetTop - 100,
@@ -80,26 +81,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     createParticles();
 
-    const cards = document.querySelectorAll('.project-card');
-    cards.forEach(card => {
-        card.addEventListener('mousemove', function(e) {
-            const rect = this.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            
-            const rotateX = (y - centerY) / 20;
-            const rotateY = (centerX - x) / 20;
-            
-            this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
-        });
-    });
+    setupProjectCardEffects();
+    loadFeaturedProjects();
     
     const titleElement = document.querySelector('h1');
     if (titleElement) {
@@ -210,7 +193,7 @@ function createParticles() {
     particlesContainer.style.pointerEvents = 'none';
     document.body.prepend(particlesContainer);
     
-    const particleCount = 60;
+    const particleCount = 34;
     
     for (let i = 0; i < particleCount; i++) {
         createParticle(particlesContainer);
@@ -221,14 +204,14 @@ function createParticle(container) {
     const particle = document.createElement('div');
     particle.className = 'particle';
     particle.style.position = 'absolute';
-    const size = Math.random() * 12 + 8;
+    const size = Math.random() * 6 + 3;
     particle.style.width = size + 'px';
     particle.style.height = size + 'px';
     const colors = [
-        'rgba(79,70,229,0.25)',
-        'rgba(16,185,129,0.18)',
-        'rgba(255,255,255,0.18)',
-        'rgba(55,48,163,0.18)',
+        'rgba(99,102,241,0.18)',
+        'rgba(16,185,129,0.14)',
+        'rgba(255,255,255,0.12)',
+        'rgba(34,211,238,0.10)',
         'rgba(255,255,255,0.10)'
     ];
     particle.style.background = colors[Math.floor(Math.random() * colors.length)];
@@ -252,3 +235,136 @@ function createParticle(container) {
         createParticle(container);
     }, duration * 1000);
 } 
+
+function setupProjectCardEffects(root = document) {
+    const cards = root.querySelectorAll('.project-card');
+    cards.forEach(card => {
+        if (card.dataset.effectsReady === 'true') return;
+        card.dataset.effectsReady = 'true';
+
+        card.addEventListener('mousemove', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const rotateX = (y - centerY) / 20;
+            const rotateY = (centerX - x) / 20;
+
+            this.style.transform = 'perspective(1000px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) translateY(-8px)';
+        });
+
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+        });
+    });
+}
+
+const pinnedProjectsApi = 'https://gh-pinned-repos.egoist.dev/?username=rRopelato';
+const githubReposApi = 'https://api.github.com/users/rRopelato/repos?sort=updated&per_page=100';
+const preferredRepos = ['pawnnexus', 'chromedriver_updater', 'FlaskBase', 'RopelatoSystem', 'geradorbd_python'];
+
+async function loadFeaturedProjects() {
+    const grid = document.querySelector('.projects-grid');
+    if (!grid || !window.fetch) return;
+
+    try {
+        const projects = await fetchPinnedProjects();
+        if (projects.length > 0) {
+            renderProjects(grid, projects.slice(0, 4));
+            return;
+        }
+    } catch (error) {
+        console.warn('Could not load pinned repositories:', error);
+    }
+
+    try {
+        const projects = await fetchPreferredRepositories();
+        if (projects.length > 0) {
+            renderProjects(grid, projects.slice(0, 4));
+        }
+    } catch (error) {
+        console.warn('Could not load GitHub repositories:', error);
+    }
+}
+
+async function fetchPinnedProjects() {
+    const response = await fetchWithTimeout(pinnedProjectsApi, 4000);
+    if (!response.ok) return [];
+
+    const data = await response.json();
+    if (!Array.isArray(data)) return [];
+
+    return data.map(project => ({
+        name: project.repo,
+        description: project.description,
+        url: project.link || ('https://github.com/' + project.owner + '/' + project.repo),
+        language: project.language,
+        stars: project.stars
+    })).filter(project => project.name && project.url);
+}
+
+async function fetchPreferredRepositories() {
+    const response = await fetchWithTimeout(githubReposApi, 4000);
+    if (!response.ok) return [];
+
+    const repos = await response.json();
+    if (!Array.isArray(repos)) return [];
+
+    return preferredRepos
+        .map(name => repos.find(repo => repo.name.toLowerCase() === name.toLowerCase()))
+        .filter(Boolean)
+        .map(repo => ({
+            name: repo.name,
+            description: repo.description,
+            url: repo.html_url,
+            language: repo.language,
+            stars: repo.stargazers_count
+        }));
+}
+
+async function fetchWithTimeout(url, timeout) {
+    if (!window.AbortController) return fetch(url);
+
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeout);
+
+    try {
+        return await fetch(url, { signal: controller.signal });
+    } finally {
+        clearTimeout(timer);
+    }
+}
+
+function renderProjects(grid, projects) {
+    grid.innerHTML = projects.map(projectCardTemplate).join('');
+    setupProjectCardEffects(grid);
+}
+
+function projectCardTemplate(project) {
+    const name = escapeHtml(project.name || 'Untitled repository');
+    const description = escapeHtml(project.description || 'GitHub repository by Renan Ropelato.');
+    const url = escapeHtml(project.url || '#');
+    const tags = [project.language]
+        .filter(Boolean)
+        .map(tag => '<span>' + escapeHtml(tag) + '</span>')
+        .join('');
+    const stars = Number.isFinite(project.stars) ? '<span class=project-stat><i class=fas fa-star></i> ' + project.stars + '</span>' : '';
+
+    return '<a href="' + url + '" target="_blank" rel="noopener noreferrer" class="project-card">' +
+        '<div class=project-info>' +
+            '<h3>' + name + '</h3>' +
+            '<p>' + description + '</p>' +
+            '<div class=project-card-footer>' +
+                '<div class=project-tags>' + tags + '</div>' +
+                stars +
+            '</div>' +
+        '</div>' +
+    '</a>';
+}
+
+function escapeHtml(value) {
+    const div = document.createElement('div');
+    div.textContent = String(value);
+    return div.innerHTML;
+}
