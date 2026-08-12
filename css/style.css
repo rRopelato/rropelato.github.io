@@ -1,0 +1,424 @@
+:root {
+  color-scheme: dark;
+  --bg: rgb(4, 8, 6);
+  --panel: rgba(6, 14, 10, 0.82);
+  --border: rgba(120, 255, 170, 0.25);
+  --text: #c9ffdd;
+  --dim: #7fa896;
+  --accent: #78ffaa;
+  --mono: "JetBrains Mono", "Fira Code", "Cascadia Code", Consolas, monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  /* clip (not hidden) avoids implicitly turning overflow-y into "auto",
+     which would make body its own scroll container and break wheel
+     scrolling over the fixed background canvas at the page's sides */
+  overflow-x: clip;
+  scroll-behavior: smooth;
+}
+
+#ascii-liquid-bg {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  display: block;
+}
+
+/* ---- top nav ---- */
+.termnav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+  justify-content: center;
+  padding: 0.9rem 1rem;
+  background: rgba(4, 10, 7, 0.75);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--border);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+}
+
+.termnav a {
+  color: var(--dim);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.termnav a:hover {
+  color: var(--accent);
+}
+
+/* ---- layout ---- */
+.content {
+  position: relative;
+  z-index: 1;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  font-family: var(--mono);
+  color: var(--text);
+}
+
+/* ---- terminal window card ---- */
+.term-window {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+  scroll-margin-top: 4.5rem;
+}
+
+.term-titlebar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 0.9rem;
+  background: rgba(120, 255, 170, 0.06);
+  border-bottom: 1px solid var(--border);
+}
+
+.term-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.term-dot.red { background: #ff5f56; }
+.term-dot.yellow { background: #ffbd2e; }
+.term-dot.green { background: #27c93f; }
+
+.term-titletext {
+  margin-left: 0.5rem;
+  font-size: 0.78rem;
+  color: var(--dim);
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lang-toggle {
+  margin-left: auto;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--mono);
+}
+
+.lang-toggle button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.72rem;
+  letter-spacing: 0.03em;
+  color: var(--dim);
+  padding: 0.1rem 0.2rem;
+}
+
+.lang-toggle button:hover {
+  color: var(--text);
+}
+
+.lang-toggle button.active {
+  color: var(--accent);
+  text-shadow: 0 0 8px rgba(120, 255, 170, 0.5);
+}
+
+.lang-sep {
+  color: var(--dim);
+  font-size: 0.72rem;
+}
+
+.term-body {
+  padding: 1.25rem 1.4rem 1.6rem;
+}
+
+.prompt-line {
+  font-size: 0.85rem;
+  color: var(--dim);
+  margin-bottom: 0.5rem;
+}
+
+.prompt {
+  color: var(--accent);
+  margin-right: 0.4rem;
+}
+
+/* ---- about ---- */
+.about-body {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.avatar-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.avatar {
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  display: block;
+}
+
+.avatar.ascii-replaced {
+  display: none;
+}
+
+.ascii-avatar {
+  display: none;
+  white-space: pre;
+  font-family: var(--mono);
+  line-height: 1;
+  letter-spacing: 0;
+  margin: 0;
+  user-select: none;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  padding: 6px;
+  background: rgb(6, 14, 10); /* fully opaque: no animated bg bleeding through */
+}
+
+.ascii-avatar.ready {
+  display: block;
+}
+
+.about-text h1 {
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  font-weight: 600;
+  text-shadow: 0 0 20px rgba(120, 255, 170, 0.35);
+  margin-bottom: 0.3rem;
+}
+
+.subtitle {
+  color: var(--accent);
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.about-line {
+  font-size: 0.9rem;
+  color: var(--text);
+  opacity: 0.85;
+  line-height: 1.6;
+  margin-bottom: 0.4rem;
+}
+
+.link-row {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.85rem;
+}
+
+.link-row a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px dotted transparent;
+}
+
+.link-row a:hover {
+  border-bottom-color: var(--accent);
+}
+
+/* ---- projects ---- */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 0.75rem;
+}
+
+.project-card {
+  display: block;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: rgba(120, 255, 170, 0.03);
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.project-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.project-card h3 {
+  font-size: 0.95rem;
+  color: var(--accent);
+  margin-bottom: 0.35rem;
+}
+
+.project-card p {
+  font-size: 0.82rem;
+  opacity: 0.75;
+  line-height: 1.5;
+  margin-bottom: 0.6rem;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.tags span {
+  font-size: 0.7rem;
+  padding: 0.15rem 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--dim);
+}
+
+/* ---- skills ---- */
+.skills-list dt {
+  color: var(--accent);
+  font-size: 0.85rem;
+  margin-top: 0.9rem;
+}
+
+.skills-list dt:first-child {
+  margin-top: 0;
+}
+
+.skills-list dd {
+  font-size: 0.85rem;
+  opacity: 0.8;
+  margin-left: 0;
+  margin-top: 0.25rem;
+  line-height: 1.6;
+}
+
+/* ---- experience / education ---- */
+.log-entry {
+  padding: 0.9rem 0;
+  border-top: 1px dashed var(--border);
+}
+
+.log-entry:first-of-type {
+  border-top: none;
+}
+
+.log-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.log-title {
+  color: var(--accent);
+  font-size: 0.9rem;
+}
+
+.log-date {
+  color: var(--dim);
+  font-size: 0.78rem;
+}
+
+.log-entry ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.log-entry li {
+  font-size: 0.82rem;
+  opacity: 0.8;
+  line-height: 1.55;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.log-entry li::before {
+  content: "-";
+  position: absolute;
+  left: 0;
+  color: var(--dim);
+}
+
+/* ---- resume page ---- */
+.resume-name {
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  font-weight: 600;
+  text-shadow: 0 0 20px rgba(120, 255, 170, 0.35);
+}
+
+.resume-location {
+  color: var(--dim);
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+.resume-heading {
+  color: var(--accent);
+  font-size: 1rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.divider {
+  border: none;
+  border-top: 1px dashed var(--border);
+  margin: 1.25rem 0;
+}
+
+/* ---- footer ---- */
+.term-footer {
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--dim);
+  padding-top: 0.5rem;
+}
+
+.cursor {
+  animation: blink 1s steps(1) infinite;
+  color: var(--accent);
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+@media (max-width: 560px) {
+  .about-body {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .link-row {
+    justify-content: center;
+  }
+
+  .log-head {
+    flex-direction: column;
+  }
+}

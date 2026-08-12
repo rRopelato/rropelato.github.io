@@ -1,244 +1,210 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Renan Ropelato | Portfolio</title>
-    <meta name="description" content="Portfolio of Renan Ropelato, a full-stack developer focused on Java, Python, web applications, and process automation.">
-    <link rel="canonical" href="https://ropelato.dev.br/">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Renan Ropelato | Portfolio">
-    <meta property="og:description" content="Full-stack developer focused on Java, Python, web applications, and process automation.">
-    <meta property="og:url" content="https://ropelato.dev.br/">
-    <meta property="og:image" content="https://github.com/rRopelato.png">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Renan Ropelato | Portfolio">
-    <meta name="twitter:description" content="Full-stack developer focused on Java, Python, web applications, and process automation.">
-    <meta name="twitter:image" content="https://github.com/rRopelato.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Renan Ropelato | Portfolio</title>
+<meta name="description" content="Portfolio of Renan Ropelato, a full-stack developer focused on Java, Python, web applications, and process automation." />
+<link rel="canonical" href="https://portfolio.ropelato.dev.br/" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Renan Ropelato | Portfolio" />
+<meta property="og:description" content="Full-stack developer focused on Java, Python, web applications, and process automation." />
+<meta property="og:url" content="https://portfolio.ropelato.dev.br/" />
+<meta property="og:image" content="https://avatars.githubusercontent.com/rRopelato" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Renan Ropelato | Portfolio" />
+<meta name="twitter:description" content="Full-stack developer focused on Java, Python, web applications, and process automation." />
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/rRopelato" />
+<link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-    <nav class="dock">
-        <div class="dock-container">
-            <a href="#about" class="dock-item active" aria-label="About">
-                <i class="fas fa-home"></i>
-            </a>
-            <a href="#projects" class="dock-item" aria-label="Projects">
-                <i class="fas fa-code"></i>
-            </a>
-            <a href="#skills" class="dock-item" aria-label="Skills">
-                <i class="fas fa-laptop-code"></i>
-            </a>
-            <a href="#experiences" class="dock-item" aria-label="Experience">
-                <i class="fas fa-briefcase"></i>
-            </a>
-            <a href="resume.html" class="dock-item" aria-label="Resume">
-                <i class="fas fa-file-alt"></i>
-                <span class="tooltip">Resume</span>
-            </a>
-            <a href="https://github.com/rRopelato" target="_blank" rel="noopener noreferrer" class="dock-item" aria-label="GitHub">
-                <i class="fab fa-github"></i>
-                <span class="tooltip">GitHub</span>
-            </a>
-            <a href="https://linkedin.com/in/renan-ropelato" target="_blank" rel="noopener noreferrer" class="dock-item" aria-label="LinkedIn">
-                <i class="fab fa-linkedin"></i>
-                <span class="tooltip">LinkedIn</span>
-            </a>
+  <canvas id="ascii-liquid-bg"></canvas>
+
+  <nav class="termnav">
+    <a href="#about" data-i18n="nav.about">[1] about</a>
+    <a href="#projects" data-i18n="nav.projects">[2] projects</a>
+    <a href="#skills" data-i18n="nav.skills">[3] skills</a>
+    <a href="#experience" data-i18n="nav.experience">[4] experience</a>
+    <a href="#education" data-i18n="nav.education">[5] education</a>
+    <a href="#contact" data-i18n="nav.contact">[6] contact</a>
+    <a href="resume.html" data-i18n="nav.resume">[7] resume</a>
+  </nav>
+
+  <main class="content">
+
+    <section id="about" class="term-window">
+      <div class="term-titlebar">
+        <span class="term-dot red"></span>
+        <span class="term-dot yellow"></span>
+        <span class="term-dot green"></span>
+        <span class="term-titletext">renan@portfolio: ~</span>
+        <div class="lang-toggle" role="group" aria-label="Language / Idioma">
+          <button type="button" data-lang-btn="en">EN</button>
+          <span class="lang-sep">-</span>
+          <button type="button" data-lang-btn="pt">PT</button>
         </div>
-    </nav>
-
-    <main>
-        <section id="about" class="section">
-            <div class="container">
-                <div class="about-content">
-                    <div class="about-text">
-                        <h1>Hi, I'm <span class="highlight">Renan Ropelato</span> <span class="wave">👋</span></h1>
-                        <p class="subtitle">Full-Stack Developer</p>
-                        <p class="description">Building web applications and automation solutions with Java, Python, and modern tooling.</p>
-                        <div class="resume-button">
-                            <a href="resume.html" class="cta-button" title="Resume" aria-label="Open resume">
-                                <i class="fas fa-file-alt"></i>
-                            </a>
-                            <a href="https://github.com/rRopelato" class="cta-button social-btn" target="_blank" rel="noopener noreferrer" title="GitHub" aria-label="Open GitHub profile">
-                                <i class="fab fa-github"></i>
-                            </a>
-                            <a href="https://linkedin.com/in/renan-ropelato" class="cta-button social-btn" target="_blank" rel="noopener noreferrer" title="LinkedIn" aria-label="Open LinkedIn profile">
-                                <i class="fab fa-linkedin"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="about-image">
-                        <img src="https://github.com/rRopelato.png" alt="Ropelato Profile Picture directly from GitHub" width="150" height="150">
-                        <p class="easter-egg-hint">Try clicking 3 times on my profile pic!</p>
-                    </div>
-                </div>
-
-                <div class="about-details">
-                    <h2>About</h2>
-                    <p>Full-stack developer focused on Java, Python, and practical systems that make daily work faster.</p>
-                    <p>Experienced in web applications, API integrations, database modeling, and process automation with tools such as Selenium, Playwright, VBA, and Google Apps Script.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="projects" class="section">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Featured Projects</h2>
-                    <a href="https://github.com/rRopelato?tab=repositories" target="_blank" rel="noopener noreferrer" class="view-all">My Projects</a>
-                </div>
-                <div class="projects-grid">
-                    <a href="https://github.com/rRopelato/PawnNexus" target="_blank" rel="noopener noreferrer" class="project-card">
-                        <div class="project-info">
-                            <h3>PawnNexus</h3>
-                            <p>Marketplace project for pawn listings and management.</p>
-                            <div class="project-tags">
-                                <span>Full Stack</span>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="https://github.com/rRopelato/chromedriver_updater" target="_blank" rel="noopener noreferrer" class="project-card">
-                        <div class="project-info">
-                            <h3>ChromeDriver Updater</h3>
-                            <p>ChromeDriver updater written in Go.</p>
-                            <div class="project-tags">
-                                <span>Go</span>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="https://github.com/rRopelato/FlaskBase" target="_blank" rel="noopener noreferrer" class="project-card">
-                        <div class="project-info">
-                            <h3>FlaskBase</h3>
-                            <p>Flask base project template.</p>
-                            <div class="project-tags">
-                                <span>CSS</span>
-                                <span>Python</span>
-                                <span>Flask</span>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="https://github.com/rRopelato/RopelatoSystem" target="_blank" rel="noopener noreferrer" class="project-card">
-                        <div class="project-info">
-                            <h3>RopelatoSystem</h3>
-                            <p>Login system written in PHP.</p>
-                            <div class="project-tags">
-                                <span>PHP</span>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="https://github.com/rRopelato/geradorbd_python" target="_blank" rel="noopener noreferrer" class="project-card">
-                        <div class="project-info">
-                            <h3>Gerador DB Python</h3>
-                            <p>Semi automatic database generator written in Python.</p>
-                            <div class="project-tags">
-                                <span>Python</span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <section id="skills" class="section">
-            <div class="container">
-                <h2>Skills & Expertise</h2>
-                <div class="skills-container">
-                    <div class="skill-category">
-                        <h3>Languages</h3>
-                        <div class="skills-grid">
-                            <div class="skill-item">
-                                <i class="fab fa-java"></i>
-                                <span>Java</span>
-                            </div>
-                            <div class="skill-item">
-                                <i class="fab fa-python"></i>
-                                <span>Python</span>
-                            </div>
-                            <div class="skill-item">
-                                <i class="fab fa-js"></i>
-                                <span>JavaScript</span>
-                            </div>
-                            <div class="skill-item">
-                                <i class="fab fa-php"></i>
-                                <span>PHP</span>
-                            </div>
-                            <div class="skill-item">
-                                <i class="fab fa-html5"></i>
-                                <span>HTML</span>
-                            </div>
-                            <div class="skill-item">
-                                <i class="fab fa-css3-alt"></i>
-                                <span>CSS</span>
-                            </div>
-                            <div class="skill-item">
-                                <i class="fa-brands fa-react"></i>
-                                <span>React</span>
-                            </div>
-                            <div class="skill-item">
-                                <i class="fas fa-database"></i>
-                                <span>SQL</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="skill-category">
-                        <h3>Tools & Others</h3>
-                        <div class="skills-grid">
-                            <div class="skill-item">
-                                <i class="fab fa-github"></i>
-                                <span>Git/GitHub</span>
-                            </div>
-                            <div class="skill-item">
-                                <i class="fab fa-docker"></i>
-                                <span>Docker</span>
-                            </div>
-                            <div class="skill-item">
-                                <i class="fas fa-terminal"></i>
-                                <span>Command Line</span>
-                            </div>
-                            <div class="skill-item">
-                                <i class="fa-brands fa-figma"></i>
-                                <span>Figma</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="experiences" class="section">
-            <div class="container">
-                <h2>Work Experience</h2>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-date">2022 - 2025</div>
-                        <div class="timeline-content">
-                            <h3>Solução Financeira</h3>
-                            <p>Technical Assistant</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-date">2025 - Present</div>
-                        <div class="timeline-content">
-                            <h3>IPM Sistemas</h3>
-                            <p>Resident Support Analyst</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <p>Designed & Built by Renan Ropelato</p>
-            </div>
+      </div>
+      <div class="term-body about-body">
+        <div class="avatar-wrap">
+          <img id="avatar-source" class="avatar" src="https://avatars.githubusercontent.com/rRopelato" alt="Renan Ropelato" width="96" height="96" crossorigin="anonymous" />
+          <pre id="ascii-avatar" class="ascii-avatar" aria-label="ASCII portrait of Renan Ropelato"></pre>
         </div>
+        <div class="about-text">
+          <p class="prompt-line"><span class="prompt">$</span> whoami</p>
+          <h1>Renan Ropelato</h1>
+          <p class="subtitle" data-i18n="about.subtitle">&gt; Full-Stack Developer</p>
+          <p class="prompt-line"><span class="prompt">$</span> cat about.txt</p>
+          <p class="about-line" data-i18n="about.line1">Full-stack developer focused on Java, Python, and practical systems that make daily work faster.</p>
+          <p class="about-line" data-i18n="about.line2">Experienced in web applications, API integrations, database modeling, and process automation with tools such as Selenium, Playwright, VBA, and Google Apps Script.</p>
+          <p class="about-line" data-i18n="about.line3">Lives in Campo Mourão, Paraná, Brazil.</p>
+          <div class="link-row">
+            <a href="resume.html" data-i18n="link.resume">[resume]</a>
+            <a href="https://github.com/rRopelato" target="_blank" rel="noopener noreferrer">[github]</a>
+            <a href="https://linkedin.com/in/renan-ropelato" target="_blank" rel="noopener noreferrer">[linkedin]</a>
+            <a href="mailto:r.ropelato@proton.me">[email]</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="term-window">
+      <div class="term-titlebar">
+        <span class="term-dot red"></span>
+        <span class="term-dot yellow"></span>
+        <span class="term-dot green"></span>
+        <span class="term-titletext">renan@portfolio: ~/projects</span>
+      </div>
+      <div class="term-body">
+        <p class="prompt-line"><span class="prompt">$</span> ls -la projects/</p>
+        <div class="projects-grid">
+          <a class="project-card" href="https://pawnnexus.com/" target="_blank" rel="noopener noreferrer">
+            <h3>PawnNexus</h3>
+            <p data-i18n="project.pawnnexus">A Dragon's Dogma 2 community platform for pawn listings and management.</p>
+            <div class="tags"><span>Full Stack</span></div>
+          </a>
+          <a class="project-card" href="https://github.com/rRopelato/chromedriver_updater" target="_blank" rel="noopener noreferrer">
+            <h3>ChromeDriver Updater</h3>
+            <p data-i18n="project.chromedriver">ChromeDriver updater written in Go.</p>
+            <div class="tags"><span>Go</span></div>
+          </a>
+          <a class="project-card" href="https://github.com/rRopelato/FlaskBase" target="_blank" rel="noopener noreferrer">
+            <h3>Flask Base Template</h3>
+            <p data-i18n="project.flaskbase">STUDY PROJECT - Flask base project template.</p>
+            <div class="tags"><span>Python</span><span>Flask</span><span>CSS</span></div>
+          </a>
+          <a class="project-card" href="https://github.com/rRopelato/RopelatoSystem" target="_blank" rel="noopener noreferrer">
+            <h3>PHP Login System</h3>
+            <p data-i18n="project.phplogin">STUDY PROJECT - Login system written in PHP.</p>
+            <div class="tags"><span>PHP</span></div>
+          </a>
+          <a class="project-card" href="https://github.com/rRopelato/geradorbd_python" target="_blank" rel="noopener noreferrer">
+            <h3>Python Database Generator</h3>
+            <p data-i18n="project.pythondb">STUDY PROJECT - Semi automatic database generator written in Python.</p>
+            <div class="tags"><span>Python</span></div>
+          </a>
+        </div>
+        <p class="prompt-line"><a href="https://github.com/rRopelato?tab=repositories" target="_blank" rel="noopener noreferrer" data-i18n="projects.viewall">→ view all repositories</a></p>
+      </div>
+    </section>
+
+    <section id="skills" class="term-window">
+      <div class="term-titlebar">
+        <span class="term-dot red"></span>
+        <span class="term-dot yellow"></span>
+        <span class="term-dot green"></span>
+        <span class="term-titletext">renan@portfolio: ~/skills</span>
+      </div>
+      <div class="term-body">
+        <p class="prompt-line"><span class="prompt">$</span> cat skills.txt</p>
+        <dl class="skills-list">
+          <dt data-i18n="skills.programming">Programming &amp; Scripting</dt>
+          <dd>Python, Java, PHP, JavaScript, HTML, CSS, VBA, Google Apps Script, MySQL</dd>
+          <dt data-i18n="skills.frameworks">Frameworks &amp; Libraries</dt>
+          <dd>Spring, Flask, React, Selenium, BeautifulSoup, PyAutoGUI</dd>
+          <dt data-i18n="skills.tools">Tools &amp; Platforms</dt>
+          <dd>Git, Docker, Google Cloud Platform (GCP), AnyDesk, VS Code, IntelliJ, Excel, Google Sheets, Figma</dd>
+          <dt data-i18n="skills.data">Data &amp; Automation</dt>
+          <dd>Web Scraping, Process Automation, API Integration, Database Modeling, Dynamic Dashboards</dd>
+        </dl>
+      </div>
+    </section>
+
+    <section id="experience" class="term-window">
+      <div class="term-titlebar">
+        <span class="term-dot red"></span>
+        <span class="term-dot yellow"></span>
+        <span class="term-dot green"></span>
+        <span class="term-titletext">renan@portfolio: ~/experience</span>
+      </div>
+      <div class="term-body">
+        <p class="prompt-line"><span class="prompt">$</span> tail -f experience.log</p>
+        <div class="log-entry">
+          <div class="log-head">
+            <span class="log-title" data-i18n="exp.ipm.title">IPM Sistemas — Resident Support Analyst</span>
+            <span class="log-date" data-i18n="exp.ipm.date">Nov 2025 – Present</span>
+          </div>
+          <ul>
+            <li data-i18n="exp.ipm.li1">Works at the city hall of Campo Mourão, Paraná, Brazil.</li>
+          </ul>
+        </div>
+        <div class="log-entry">
+          <div class="log-head">
+            <span class="log-title" data-i18n="exp.sf.title">Solução Financeira — Technical Assistant</span>
+            <span class="log-date" data-i18n="exp.sf.date">May 2022 – Sep 2025</span>
+          </div>
+          <ul>
+            <li data-i18n="exp.sf.li1">Developed full-stack internal applications with API integration, process automation (Python, VBA, Apps Script), and legacy system support, improving operational efficiency.</li>
+            <li data-i18n="exp.sf.li2">Automated web tasks and data extraction using Selenium, BeautifulSoup, Playwright, and PyAutoGUI; maintained dynamic Excel/Google Sheets dashboards.</li>
+            <li data-i18n="exp.sf.li3">Contributed to database design, managed GCP resources, provided remote IT support via AnyDesk, and created technical tutorials for internal training.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="education" class="term-window">
+      <div class="term-titlebar">
+        <span class="term-dot red"></span>
+        <span class="term-dot yellow"></span>
+        <span class="term-dot green"></span>
+        <span class="term-titletext">renan@portfolio: ~/education</span>
+      </div>
+      <div class="term-body">
+        <p class="prompt-line"><span class="prompt">$</span> cat education.txt</p>
+        <div class="log-entry">
+          <div class="log-head">
+            <span class="log-title" data-i18n="edu.title">Centro Universitário Integrado — Systems Analysis and Development</span>
+            <span class="log-date" data-i18n="edu.date">May 2025 – Jan 2027 (Estimated)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="term-window">
+      <div class="term-titlebar">
+        <span class="term-dot red"></span>
+        <span class="term-dot yellow"></span>
+        <span class="term-dot green"></span>
+        <span class="term-titletext">renan@portfolio: ~/contact</span>
+      </div>
+      <div class="term-body">
+        <p class="prompt-line"><span class="prompt">$</span> cat contact.txt</p>
+        <div class="link-row">
+          <a href="mailto:r.ropelato@pm.me">r.ropelato@proton.me</a>
+          <a href="https://github.com/rRopelato" target="_blank" rel="noopener noreferrer">github.com/rropelato</a>
+          <a href="https://linkedin.com/in/renan-ropelato" target="_blank" rel="noopener noreferrer">linkedin.com/in/renan-ropelato</a>
+        </div>
+        <p class="prompt-line"><span class="prompt">$</span> <span class="cursor">_</span></p>
+      </div>
+    </section>
+
+    <footer class="term-footer">
+      <p data-i18n="footer.text">Designed &amp; built by Renan Ropelato</p>
     </footer>
 
-    <script src="script.js"></script>
+  </main>
+
+  <script src="js/ascii-liquid-bg.js"></script>
+  <script src="js/ascii-avatar.js"></script>
+  <script src="js/i18n.js"></script>
 </body>
-</html> 
+</html>

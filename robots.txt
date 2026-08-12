@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ropelato.dev.br/sitemap.xml
+Sitemap: https://portfolio.ropelato.dev.br/sitemap.xml
