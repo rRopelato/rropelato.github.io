@@ -12,7 +12,7 @@
     cellSize: 15,          // px per character cell
     fontFamily: '"JetBrains Mono", "Fira Code", "Cascadia Code", Consolas, monospace',
     ramp: " .:-=+*#%@",   // dark -> light density
-    speed: 0.4,            // flow speed
+    speed: 0.1,            // flow speed
     scale: 0.012,          // noise frequency (lower = larger blobs)
     warp: 3.0,             // domain-warp strength
     rippleStrength: 1.1,
